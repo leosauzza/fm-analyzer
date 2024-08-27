@@ -1,0 +1,62 @@
+/* General Styles */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    overflow-x: auto;
+}
+
+.table-dark {
+    background-color: #1e1e1e;
+}
+
+.btn-link {
+    color: #ffffff;
+}
+
+.btn-link:hover {
+    color: #d1d1d1;
+    text-decoration: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #2a2a2a;
+}
+
+/* Styles for hidden columns */
+.d-none {
+    display: none;
+}
+
+/* Button Container Styles */
+#buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#buttons-container .btn-secondary {
+    background-color: #333333;
+    border-color: #555555;
+    color: #ffffff;
+}
+
+#buttons-container .btn-secondary:hover {
+    background-color: #555555;
+    border-color: #777777;
+}
+
+/* Styles for sorting chevrons */
+th button.sort-asc, th button.sort-desc {
+    margin-left: 5px;
+}
+
+th button.sort-asc:hover, th button.sort-desc:hover {
+    color: #d1d1d1;
+}
+
+.hide-column-btn {
+    text-decoration:none;
+}
+
+.table {
+    min-width: 100%;
+}

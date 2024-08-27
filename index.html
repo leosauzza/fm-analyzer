@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-dark text-light">
+
+    <div class="mt-5">
+        <button id="loadDataBtn" class="btn btn-primary mb-3">Cargar Datos</button>
+        <div id="buttons-container" class="mb-3"></div>
+        <div class="filter-container">
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="columnSelect" class="form-label">Selecciona una columna:</label>
+                    <select id="columnSelect" class="form-select">
+                        <!-- Las opciones se generarán dinámicamente -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="filterInput" class="form-label">Filtrar por valor:</label>
+                    <input type="text" id="filterInput" class="form-control" placeholder="Escribe para filtrar...">
+                </div>
+            </div>
+
+        </div>
+
+
+        <table id="dataTable" class="table table-dark table-hover table-bordered">
+            <thead id="tableHead">
+                <!-- Se generarán dinámicamente -->
+            </thead>
+            <tbody id="tableBody">
+                <!-- Se generarán dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
