@@ -25,7 +25,7 @@ function generateTable(data) {
     let headerRow1 = document.createElement('tr');
     columns.forEach((column, index) => {
         let th = document.createElement('th');
-        th.innerHTML = `${column} <button class="btn btn-link p-0 text-light hide-column-btn" data-index="${index}">&#9664;</button>`;
+        th.innerHTML = `${column} <button class="btn btn-link p-0 text-light hide-column-btn btn-no-decoration" data-index="${index}">❌</button>`;
         headerRow1.appendChild(th);
     });
     tableHead.appendChild(headerRow1);
@@ -35,13 +35,13 @@ function generateTable(data) {
     columns.forEach((column, index) => {
         let th = document.createElement('th');
         let ascButton = document.createElement('button');
-        ascButton.innerHTML = '&#9650;';
-        ascButton.className = 'sort-asc btn btn-link text-light p-0';
+        ascButton.innerHTML = '🔼';
+        ascButton.className = 'sort-asc btn btn-link text-light btn-no-decoration p-0';
         ascButton.addEventListener('click', () => sortTableByColumn(index, true));
 
         let descButton = document.createElement('button');
-        descButton.innerHTML = '&#9660;';
-        descButton.className = 'sort-desc btn btn-link text-light p-0';
+        descButton.innerHTML = '🔽';
+        descButton.className = 'sort-desc btn btn-link text-light btn-no-decoration p-0';
         descButton.addEventListener('click', () => sortTableByColumn(index, false));
 
         th.appendChild(ascButton);

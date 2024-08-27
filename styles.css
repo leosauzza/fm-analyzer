@@ -53,7 +53,7 @@ th button.sort-asc:hover, th button.sort-desc:hover {
     color: #d1d1d1;
 }
 
-.hide-column-btn {
+button.btn-link.btn-no-decoration{
     text-decoration:none;
 }
 
