@@ -81,6 +81,8 @@ function generateTable(data) {
             toggleColumnVisibility(index);
         });
     });
+
+    applyStyles();
 }
 
 function sortTableByColumn(columnIndex, isAscending) {
@@ -141,6 +143,28 @@ function filterTable() {
             row.style.display = '';
         } else {
             row.style.display = 'none';
+        }
+    });
+}
+
+function applyStyles() {
+    const cells = document.querySelectorAll('#tableBody td');
+
+    cells.forEach(cell => {
+        const cellValue = parseFloat(cell.textContent.trim());
+
+        if (!isNaN(cellValue)) {
+            if (cellValue > 8 && cellValue < 11) {
+                cell.style.fontWeight = 'bold';
+            }
+            if (cellValue > 10 && cellValue < 15) {
+                cell.style.fontWeight = 'bold';
+                cell.style.color = 'yellow';
+            }
+            if (cellValue > 14) {
+                cell.style.fontWeight = 'bold';
+                cell.style.color = 'green';
+            }
         }
     });
 }
