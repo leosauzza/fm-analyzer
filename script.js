@@ -25,7 +25,8 @@ function generateTable(data) {
     let headerRow1 = document.createElement('tr');
     columns.forEach((column, index) => {
         let th = document.createElement('th');
-        th.innerHTML = `${column} <button class="btn btn-link p-0 text-light hide-column-btn btn-no-decoration" data-index="${index}">❌</button>`;
+        let camelCaseColumn = camelCase(column);
+        th.innerHTML = `${camelCaseColumn} <button class="btn btn-link p-0 text-light hide-column-btn btn-no-decoration" data-index="${index}">❌</button>`;
         headerRow1.appendChild(th);
     });
     tableHead.appendChild(headerRow1);
@@ -172,3 +173,75 @@ function applyStyles() {
         }
     });
 }
+
+document.getElementById('customFilterButton').addEventListener('click', function () {
+    const filterCondition = document.getElementById('customFilterInput').value.trim();
+    if (filterCondition) {
+        applyCustomFilter(filterCondition);
+    } else {
+        // Si el filtro está vacío, muestra todas las filas
+        document.querySelectorAll('#tableBody tr').forEach(row => {
+            row.style.display = '';
+        });
+    }
+});
+
+function applyCustomFilter(filterCondition) {
+    const table = document.getElementById('dataTable');
+    const tbody = table.querySelector('tbody');
+    const rows = tbody.querySelectorAll('tr');
+
+    rows.forEach(row => {
+        const cells = Array.from(row.children);
+        const rowData = {};
+
+        // Mapear los nombres de las columnas con sus valores
+        cells.forEach((cell, index) => {
+            const thElement = table.querySelector(`thead tr:first-child th:nth-child(${index + 1})`);
+            // Extraer solo el nombre de la columna antes del botón
+            const header = thElement.childNodes[0].textContent.trim().toLowerCase();
+            let cellValue = cell.textContent.trim();
+            
+            // Escapar apóstrofes en los valores
+            if (isNaN(cellValue)) {
+                cellValue = `'${cellValue.replace(/'/g, "\\'").toLowerCase()}'`;
+            } else {
+                cellValue = parseFloat(cellValue);
+            }
+
+            rowData[header] = cellValue;
+        });
+
+        // Reemplazar los nombres de columnas por los valores correspondientes en la condición
+        let condition = filterCondition.toLowerCase();
+        for (const key in rowData) {
+            const regex = new RegExp(`\\b${key}\\b`, 'g');
+            condition = condition.replace(regex, rowData[key]);
+        }
+
+        // Evaluar la condición y mostrar u ocultar la fila
+        try {
+            if (eval(condition)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Error en la evaluación del filtro:', error);
+            row.style.display = 'none'; // Oculta la fila si hay un error en la condición
+        }
+    });
+}
+
+function camelCase(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // Eliminar acentos
+        .replace(/[^a-zA-Z0-9\s]/g, '') // Eliminar caracteres especiales
+        .replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+            return index === 0 ? match.toLowerCase() : match.toUpperCase();
+        })
+        .replace(/\s+/g, '');
+}
+
+
