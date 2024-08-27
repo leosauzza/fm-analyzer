@@ -161,9 +161,13 @@ function applyStyles() {
                 cell.style.fontWeight = 'bold';
                 cell.style.color = 'yellow';
             }
-            if (cellValue > 14) {
+            if (cellValue > 14 && cellValue < 29) {
                 cell.style.fontWeight = 'bold';
                 cell.style.color = 'green';
+            }
+            if (cellValue > 28) {
+                cell.style.fontWeight = 'bold';
+                cell.style.color = 'red';
             }
         }
     });
